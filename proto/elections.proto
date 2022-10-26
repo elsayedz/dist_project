@@ -1,0 +1,54 @@
+syntax = "proto3";
+package elections;
+
+
+
+service Election {
+    // We send id of server that should init the election process, this comes from the middleware
+    rpc init_election(InitElectionRequest) returns (Empty) {}
+    // Send election message to servers with higher id
+    // rpc send_election_message(ElectionMessage) returns (ElectionMessageResponse) {}
+    //When server returns back live , it calls randomize IDs for all other servers, then each of them will call broadcast ID
+    rpc broadcast_id(BroadcastId) returns (Empty) {}
+    //when a node wins the election it lets other nodes know by sending its id to them
+    // rpc send_election_result(ElectionResult) returns (Empty) {}
+    
+    //After the fallen node comes back to life, it will call this method to change ids of all other nodes
+    // rpc RandomizeId(Empty) returns (Empty) {}
+
+    // rpc get_time(TimeMessageRequest) returns (TimeMessageResponse) {}
+    rpc force_failure(Empty) returns (Empty) {}
+}
+
+message Empty {
+    string message = 1;
+}
+message InitElectionRequest {
+    string id = 1;
+}
+
+message ElectionMessage { 
+    //Empty message , we just want to start the process
+    string message = 1;
+}
+
+message ElectionMessageResponse {
+    bool is_alive = 1;
+}
+
+message ElectionResult{
+    string id = 1;
+}
+
+message TimeMessageRequest{
+     
+}
+
+message TimeMessageResponse{
+    bool successful = 1;
+    string time= 2;
+}
+
+message BroadcastId {
+    string new_id = 1;
+}
