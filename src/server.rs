@@ -2,10 +2,9 @@ use tonic::{transport::Server, Request, Response, Status};
 
 use elections::election_server::{Election, ElectionServer};
 use elections::election_client::ElectionClient;
-use elections::{TimeMessageResponse, TimeMessageRequest, ElectionResult, 
-    ElectionMessageResponse, ElectionMessage, Empty, InitElectionRequest, BroadcastId};
+use elections::{Empty, InitElectionRequest, BroadcastId};
 
-// use std::collections::HashMap;
+use std::collections::HashMap;
 
 
 pub mod elections {
@@ -15,7 +14,7 @@ pub mod elections {
 
 #[derive(Debug, Default)]
 pub struct MyElection {
-    // ip_to_id : HashMap<string,string>
+    ip_to_id : HashMap<String,String>
 }
 
 #[tonic::async_trait]
@@ -31,7 +30,7 @@ impl Election for MyElection {
             message: format!("ACK!").into(),
         };
 
-        let mut client = ElectionClient::connect("http://10.40.37.84:9999").await?;
+        let mut client = ElectionClient::connect("http://10.40.37.84:9999").await.unwrap();
         let request = tonic::Request::new(
             Empty {
                 message: format!("Time to go down").into(),

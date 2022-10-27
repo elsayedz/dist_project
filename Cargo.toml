@@ -9,6 +9,10 @@ edition = "2021"
 name = "server"
 path = "src/server.rs"
 
+[[bin]]
+name = "middleware"
+path = "src/middleware.rs"
+
 [dependencies]
 tonic = "0.7"
 prost = "0.10"
