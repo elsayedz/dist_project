@@ -30,16 +30,16 @@ impl Election for MyElection {
             message: format!("ACK!").into(),
         };
 
-        let mut client = ElectionClient::connect("http://10.40.37.84:9999").await.unwrap();
-        let request = tonic::Request::new(
-            Empty {
-                message: format!("Time to go down").into(),
-            }
-        );
+        // let mut client = ElectionClient::connect("http://10.40.37.84:9999").await.unwrap();
+        // let request = tonic::Request::new(
+        //     Empty {
+        //         message: format!("Time to go down").into(),
+        //     }
+        // );
     
-        let response = client.force_failure(request).await?;
+        // let response = client.force_failure(request).await?;
     
-        println!("RESPONSE={:?}", response);
+        // println!("RESPONSE={:?}", response);
 
         Ok(Response::new(reply))
     }
@@ -82,7 +82,7 @@ impl Election for MyElection {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let addr = "10.40.37.84:50051".parse()?;
+    let addr = "10.40.39.4:50051".parse()?;
     let election_service = MyElection::default();
 
     Server::builder()
