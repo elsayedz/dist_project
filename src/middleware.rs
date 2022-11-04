@@ -14,7 +14,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
     let mut client = ElectionClient::connect("http://10.40.39.4:50051").await?;
     let mut request = tonic::Request::new(
         InitElectionRequest{
-            id: "1".to_owned(),   //to_owned() --> take a copy from the data
+            id: "2".to_owned(),   //to_owned() --> take a copy from the data
         }
     );
     
@@ -29,7 +29,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>>{
         println!("I'm alive");
         let request = tonic::Request::new(
             InitElectionRequest{
-                id: "1".to_owned(),   //to_owned() --> take a copy from the data
+                id: "2".to_owned(),   //to_owned() --> take a copy from the data
             }
         );
         let response = client.init_election(request).await;
