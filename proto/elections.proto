@@ -16,6 +16,9 @@ service Election {
     //After the fallen node comes back to life, it will call this method to change ids of all other nodes
     // rpc RandomizeId(Empty) returns (Empty) {}
 
+
+    rpc ping(Empty) returns (Empty) {}
+
     // rpc get_time(TimeMessageRequest) returns (TimeMessageResponse) {}
     rpc force_failure(Empty) returns (Empty) {}
 }
