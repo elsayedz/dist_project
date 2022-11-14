@@ -53,5 +53,7 @@ message TimeMessageResponse{
 }
 
 message BroadcastId {
-    string new_id = 1;
+    string old_id = 1;
+    string new_id = 2;
+    string new_ip = 3;
 }
